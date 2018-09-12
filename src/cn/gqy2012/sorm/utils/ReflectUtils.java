@@ -30,6 +30,8 @@ public class ReflectUtils {
 	
 	public static void invokeSet(Object obj,String columnName,Object columnValue) {
 		Method m;
+		if(columnValue == null)
+			return;
 		try {
 			m = obj.getClass().getDeclaredMethod("set"+StringUtils.firstChar2UpperCase(columnName)
 			, columnValue.getClass());

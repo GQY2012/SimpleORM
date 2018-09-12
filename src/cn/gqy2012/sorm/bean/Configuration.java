@@ -34,8 +34,18 @@ public class Configuration {
 	 * 扫描生成的Java类的包
 	 */
 	private String poPackage;
+	/**
+	 * 使用查询类的路径
+	 */
+	private String queryClass;
 	
 	
+	public String getQueryClass() {
+		return queryClass;
+	}
+	public void setQueryClass(String queryClass) {
+		this.queryClass = queryClass;
+	}
 	public String getDriver() {
 		return driver;
 	}
@@ -79,7 +89,7 @@ public class Configuration {
 		this.poPackage = poPackage;
 	}
 	public Configuration(String driver, String url, String user, String pwd, String usingDB, String srcPath,
-			String poPackage) {
+			String poPackage, String queryClass) {
 		this.driver = driver;
 		this.url = url;
 		this.user = user;
@@ -87,6 +97,7 @@ public class Configuration {
 		this.usingDB = usingDB;
 		this.srcPath = srcPath;
 		this.poPackage = poPackage;
+		this.queryClass = queryClass;
 	}
 	public Configuration() {
 	}

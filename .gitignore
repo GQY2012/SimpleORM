@@ -1,3 +1,8 @@
-
-*.class
+/bin/
+*.html
 *.properties
+doc/stylesheet.css
+doc/script.js
+doc/package-list
+src/cn/gqy2012/test/Test.java
+src/cn/gqy2012/test/Test2.java

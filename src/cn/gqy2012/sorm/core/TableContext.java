@@ -29,7 +29,9 @@ public class TableContext {
 	 */
 	public static  Map<Class,TableInfo>  poClassTableMap = new HashMap<Class,TableInfo>();
 	
-	private TableContext(){}
+	private TableContext(){
+		
+	}
 	
 	static {
 		try {
@@ -77,7 +79,7 @@ public class TableContext {
 	 * 根据表结构，更新配置po包下的类
 	 * 实现了从表结构到类结构的转化
 	 */
-	private static void updateJavaPOFile() {
+	public static void updateJavaPOFile() {
 		Map<String,TableInfo> map = TableContext.tables;
 		for(TableInfo t:map.values()) {
 			JavaFileUtils.createJavaPOFile(t,new MySqlTypeConvertor());

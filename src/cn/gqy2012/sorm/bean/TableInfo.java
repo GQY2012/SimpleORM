@@ -18,10 +18,12 @@ public class TableInfo {
 	 */
 	private Map<String,ColumnInfo> columns;
 	/**
-	 * 主键字段(不支持联合主键)
+	 * 主键字段
 	 */
 	private ColumnInfo PriKey;
-	
+	/**
+	 * 联合主键(占位，不支持)
+	 */
 	private List<ColumnInfo> PriKeys;
 	
 	public List<ColumnInfo> getPrikeys() {

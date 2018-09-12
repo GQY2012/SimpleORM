@@ -14,9 +14,11 @@ import java.sql.Statement;
 import java.util.Properties;
 
 import cn.gqy2012.sorm.bean.Configuration;
+import cn.gqy2012.sorm.pool.DBConnPool;
 
 public class DBManager {
 	private static Configuration conf;
+	private static DBConnPool pool;
 	
 	static {
 		Properties pros = new Properties();
@@ -34,9 +36,9 @@ public class DBManager {
 		conf.setUrl(pros.getProperty("mysqlURL"));
 		conf.setUser(pros.getProperty("mysqlUser"));
 		conf.setUsingDB(pros.getProperty("usingDB"));
+		conf.setQueryClass(pros.getProperty("queryClass"));
 	}
-	
-	public static Connection getConn() {
+	public static Connection createConn() {
 		try {
 			Class.forName(conf.getDriver());
 			return DriverManager.getConnection(conf.getUrl(), conf.getUser(), conf.getPwd());
@@ -45,7 +47,22 @@ public class DBManager {
 			return null;
 		}
 	}
-	
+	/**
+	 * 获得连接对象
+	 * @return
+	 */
+	public static Connection getConn() {
+		if(pool == null) {
+			 pool = new DBConnPool();
+		}
+		return pool.getConnection();
+	}
+	/**
+	 * 关闭ResultSet,Statement,Connection
+	 * @param rs
+	 * @param ps
+	 * @param conn
+	 */
 	public static void close(ResultSet rs,Statement ps,Connection conn) {
 		 if(rs!=null) {
 			try {
@@ -62,11 +79,8 @@ public class DBManager {
 			}
 		}
 		if(conn!=null) {
-			try {
-				conn.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			//放回连接池
+			pool.close(conn);
 		}
 	 }
 

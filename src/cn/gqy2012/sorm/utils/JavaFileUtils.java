@@ -57,7 +57,7 @@ public class JavaFileUtils {
 	 * @param convertor
 	 * @return JavaBean的源代码
 	 */
-	public static String createJavaSrc(TableInfo tableInfo,TypeConvertor convertor) {
+	private static String createJavaSrc(TableInfo tableInfo,TypeConvertor convertor) {
 		StringBuilder src = new StringBuilder();
 		Map<String,ColumnInfo> columns = tableInfo.getColumns();
 		List<JavaFieldGetSet> javafields = new ArrayList<>();
